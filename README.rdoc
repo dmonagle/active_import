@@ -30,7 +30,7 @@ There are three Rake tasks that allow you to use a converter on a file:
 
 === Examples
 
-rake active_import:csv FILE=user.csv CONVERTER=User CONVERTER_OPTIONS="give_admin_access=true"
+    rake active_import:csv FILE=user.csv CONVERTER=User CONVERTER_OPTIONS="give_admin_access=true"
 
 In this case the file in db/active_import/user.csv would be run through the converter UserConverter. The options specified are available within the converter. In this case @options["give_admin_access"] will evaluate to true.
 
