@@ -1,0 +1,1 @@
+<%= CSV.generate { |csv| csv << eval("#{@class_name}.attribute_names") - ["id", "created_at", "updated_at"] } %>

@@ -1,0 +1,45 @@
+# ImportConverter created by ActiveImport
+
+class <%= @converter_name.camelize %>Converter < ActiveImport::ModelConverter
+    def setup 
+<% @attributes.each do |attribute| -%>
+<% unless ["id", "created_at", "updated_at"].include? attribute -%>
+        add_column :<%= attribute %>, :match => "<%= attribute %>", :type => :<%= @model.columns_hash[attribute].type %>, :mandatory => true 
+<% end -%>
+<% end -%>
+    end
+
+    def before
+    end
+
+    def <%= @model_name %>_attributes
+        attributes = {}
+
+        [<%= [].tap {|list| (@attributes - ["id", "created_at", "updated_at"]).each {|attr| list << ":#{attr}"}}.join(", ") %>].each do |attribute|
+            attributes[attribute] = converted_values[attribute]
+        end
+
+        return attributes
+    end
+
+    def save
+        # The following line prevents nil values coming from the import overwriting the model attributes
+        remove_nil_from_converted_values
+
+        # For create only
+        <%= @model_name %> = <%= @class_name %>.new
+        # For create or update, use the following instead and change the attribute name as required
+        # <%= @model_name %> = <%= @class_name %>.find_or_create_by_id(converted_values[:id])
+
+        <%= @model_name %>.update_attributes <%= @model_name %>_attributes
+
+        return <%= @model_name %>
+    end
+
+    def after
+    end
+
+    def report
+        ""
+    end
+end

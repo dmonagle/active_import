@@ -1,0 +1,56 @@
+= ActiveImport
+
+THIS DOCUMENTATION IS RATHER INCOMPLETE, I AM WORKING ON IT.
+
+== Installation
+
+Simple add the following to your Gemfile
+
+    gem 'active_import'
+
+Then run:
+
+    bundle install
+
+== Quick Example
+
+    rails g active_import:model_converter User
+
+This will create an model converter in the directory app/model_converters. You can read through this import file to see how the import works.
+
+This also creates a default data file in db/active_import. This will be the CSV used for this converter.
+
+== Usage
+
+There are three Rake tasks that allow you to use a converter on a file:
+
+    rake active_import:csv                   Load csv file into a model using a model converter
+    rake active_import:excel                 Load excel file into a model using a model converter
+    rake active_import:seed                  Seed a list of import files
+
+=== Examples
+
+rake active_import:csv user.csv CONVERTER=User CONVERTER_OPTIONS="give_admin_access=true"
+
+In this case the file in db/active_import/user.csv would be run through the converter UserConverter. The options specified are available within the converter. In this case @options["give_admin_access"] will evaluate to true.
+
+== Seeding
+
+Seeding allows you to import several files through different model converters in a single command. It involves the creation of a .seed file. Each file goes on a single line and the options are separated by pipe symbols.
+
+=== Example
+
+    user_info/user.xls | User | give_admin_access=false,send_email=true
+    user_info/roles.xls | Role
+    user_info/permissions.xls | UserPermission
+
+Note this will get the data files from a subdirectory: db/active_import/user_info. Also the top conversion uses options but as they are optional, the following two do not.
+
+== The Converter Class
+
+=== Column Setup
+
+==== Mandatory Columns
+==== Column Types
+
+=== Custom Type Conversions
