@@ -46,7 +46,14 @@ Seeding allows you to import several files through different model converters in
     user_info/roles.xls | Role
     user_info/permissions.xls | UserPermission
 
+You could save this file as db/active_import/user_info.seed and run the command like this:
+
+    rake active_import:seed SET=user_info
+
 Note this will get the data files from a subdirectory: db/active_import/user_info. Also the top conversion uses options but as they are optional, the following two do not.
+
+If you do not specify a set, the rake task will look for a set based on the current development environment: ie development.seed.
+
 
 == The Converter Class
 
