@@ -4,7 +4,7 @@ class <%= @converter_name.camelize %>Converter < ActiveImport::ModelConverter
     def setup 
 <% @attributes.each do |attribute| -%>
 <% unless ["id", "created_at", "updated_at"].include? attribute -%>
-        add_column :<%= attribute %>, :match => "<%= attribute %>", :type => :<%= @model.columns_hash[attribute].type %>, :mandatory => true 
+        add_column :<%= attribute %>, :match => "^<%= attribute %>$", :type => :<%= @model.columns_hash[attribute].type %>, :mandatory => true
 <% end -%>
 <% end -%>
     end
