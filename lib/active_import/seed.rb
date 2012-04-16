@@ -1,6 +1,5 @@
 module ActiveImport
   class Seed
-
     def self.seed_from_file seed_file_name
       seed_file = File.open(seed_file_name, "r")
       seed_file.each_line do |seed_line|
@@ -10,11 +9,11 @@ module ActiveImport
           converter_name = seed_info[1]
 
           unless data_file_name.nil? || converter_name.nil?
-            data_file_name = import_file_with_path data_file_name
+            data_file_name = ActiveImport.import_file_with_path data_file_name
 
             if (File.exists? data_file_name)
               converter_name.strip!
-              converter_options = process_converter_options seed_info[2]
+              converter_options = ActiveImport.process_converter_options seed_info[2]
 
               puts "Importing from: #{data_file_name.cyan}"
               puts "Using converter: #{converter_name.cyan}"
@@ -38,7 +37,7 @@ module ActiveImport
                 else
                   puts "File type cannot be processed".red
               end
-              parse(import, model_converter) unless import.nil?
+              ActiveImport.parse(import, model_converter) unless import.nil?
             else
               puts "Skipping non existing file: #{data_file_name}".red
             end

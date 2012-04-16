@@ -1,3 +1,4 @@
+require "active_import/utility"
 require "active_import/import_csv"
 require "active_import/import_excel"
 require 'active_import/model_converter'
