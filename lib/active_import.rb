@@ -1,6 +1,7 @@
 require "active_import/import_csv"
 require "active_import/import_excel"
 require 'active_import/model_converter'
+require 'active_import/seed'
 
 module ActiveImport
   class Railtie < ::Rails::Railtie
