@@ -1,5 +1,7 @@
 module ActiveImport
   require "roo"
+  require 'iconv'
+
   class ImportExcel
     attr_reader :data_file, :converter, :estimated_rows
 
