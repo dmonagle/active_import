@@ -1,3 +1,5 @@
+require 'iconv' unless String.method_defined?(:encode)
+
 module ActiveImport
   if RUBY_VERSION =~ /^1.9/
     require 'csv'
@@ -60,7 +62,7 @@ module ActiveImport
         puts "Using FasterCSV parser".cyan
       end
 
-      csv_class.foreach(@data_file) do |row|
+      csv_class.foreach(@data_file, {:encoding => 'windows-1251:utf-8'}) do |row|
         row_number += 1
         if (header)
           column = 0
