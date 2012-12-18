@@ -1,6 +1,6 @@
 module ActiveImport
   require "roo"
-  require 'iconv'
+  require 'iconv' unless String.method_defined?(:encode)
 
   class ImportExcel
     attr_reader :data_file, :converter, :estimated_rows
