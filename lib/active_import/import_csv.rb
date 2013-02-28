@@ -42,11 +42,6 @@ module ActiveImport
     end
 
     def parse(&block)
-      # Get an estimate of the number of rows in the file
-      f = File.open(data_file)
-      @estimated_rows = f.readlines.size - 1
-      f.close
-
       column_mappings = @converter.columns
 
       headers = {}
@@ -61,6 +56,11 @@ module ActiveImport
         csv_class = FasterCSV
         puts "Using FasterCSV parser".cyan
       end
+
+      # Get an estimate of the number of rows in the file
+      puts @data_file.to_s.yellow
+      @estimated_rows = csv_class.read(@data_file).length - 1
+      puts "Estimated Rows: #{@estimated_rows}".magenta
 
       csv_class.foreach(@data_file, {:encoding => 'windows-1251:utf-8'}) do |row|
         row_number += 1
