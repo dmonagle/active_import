@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 3.0.0"
   s.add_dependency "colorize"
-  s.add_dependency "roo"
+  s.add_dependency "roo", ">= 1.2.3"
 
   s.add_development_dependency "sqlite3"
 end

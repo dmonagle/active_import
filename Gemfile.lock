@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    active_import (0.1.5)
+    active_import (0.1.6)
       colorize
       rails (>= 3.0.0)
-      roo
+      roo (>= 1.2.3)
 
 GEM
   remote: http://rubygems.org/

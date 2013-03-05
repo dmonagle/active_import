@@ -73,10 +73,10 @@ module ActiveImport
       excelx = false
       case File.extname(data_file).downcase
         when ".xls"
-          e = Excel.new(data_file)
+          e = Roo::Excel.new(data_file)
         when ".xlsx"
           excelx = true
-          e = Excelx.new(data_file)
+          e = Roo::Excelx.new(data_file)
       end
 
       result = find_excel_header_row(e)
